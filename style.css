@@ -92,3 +92,34 @@ body {
     background: #007acc;
     animation: blink 1s ease-in-out infinite;
 }
+
+@keyframes blink {
+    50% {
+        opacity: 1;
+    }
+}
+
+.content-box .content {
+    margin-top: 17px;
+    display: flex;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 3px solid #007acc;
+}
+
+.content button {
+    outline: none;
+    border: none;
+    width: 105px;
+    color: #007acc;
+    padding: 8px 0;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 3px solid #007acc;
+    background: none;
+    transition: transfrom 0.2s ease;
+}
