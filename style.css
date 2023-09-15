@@ -123,3 +123,23 @@ body {
     background: none;
     transition: transfrom 0.2s ease;
 }
+.content button:active{
+    transform: scale(0.89);
+}
+.content button:hover{
+    background: #ffffff;
+}
+.content .result-details{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: calc(100% - 140px);
+    justify-content: space-between;
+}
+.result-details li {
+    display: flex;
+    height: 20px;
+    list-style: none;
+    position: relative;
+    align-items: center;
+}
