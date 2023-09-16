@@ -19,4 +19,22 @@ const mistakeTag = document.querySelector(".mistake span");
 const wpmTag = document.querySelector(".wpm span");
 const cpmTag = document.querySelector(".cpm span");
 
+let timer;
+let maxTime = 60;
+let timeLeft = maxTime;
+let charIndex = mistake = isTyping = 0;
+
+function loadParagraph() {
+    const ranIndex = Math.floor(Math.random() * paragraphs.length);
+    typingText.innerHTML = "";
+    paragraphs[ranIndex].split("").forEach(char => {
+        let span = `<span>${char}</span>`
+        typingText.innerHTML += span;
+    });
+    typingText.querySelectorAll("span")[0].classList.add("active");
+    document.addEventListener("keydown", () => inpField.focus());
+    typingText.addEventListener("click", () => inpField.focus());
+
+}
+
 
