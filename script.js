@@ -6,14 +6,13 @@ const paragraphs = [
     "The candidate who has got the highest votes will be chosen as the leader.An election is considered the prime pillar of democracy. Not only for the country but the election can also be conducted in any case where public opinion matters the most.",
     "There are different types of people in each country of the world. Out of millions of people, only a few personalities become or considered as Nobel on other meaning we can say they are great.Some become great and unique by birth, and some become great or noble by their deeds and sacrifices.",
     "For acquiring noble and honorable personality, it is essential to do things thoughtfully and dedicatedly in life.One thing is significant for each citizen of any country, which is nationalism or loyalty with the nation. To understand the importance of the place of our birth, we must recognize and grow with the soil & smell of the country.",
-    "The basic technique stands in contrast to hunt and peck typing in which the typist keeps his or her eyes on the source copy at all times. Touch typing also involves the use of the home row method, where typists keep their wrists up, rather than resting them on a desk or keyboard (which can cause carpal tunnel syndrome). To avoid this, typists should sit up tall, leaning slightly forward from the waist, place their feet flat on the floor in front of them with one foot slightly in front of the other, and keep their elbows close to their sides with forearms slanted slightly upward to the keyboard; fingers should be curved slightly and rest on the home row.",
-    "The modern world is a product of centuries of technological, societal, and cultural evolution. It is characterized by rapid advancements in technology, globalization, and an increased awareness of social issues.",
+    "The basic technique stands in contrast to hunt and peck typing in which the typist keeps his or her eyes on the source copy at all times. Touch typing also involves the use of the home row method, where typists keep their wrists up, rather than resting them on a desk or keyboard (which can cause carpal tunnel syndrome). To avoid this, typists should sit up tall, leaning slightly forward from the waist, place their feet flat on the floor in front of them with one foot slightly in front of the other, and keep their elbows close to their sides with forearms slanted slightly upward to the keyboard; fingers should be curved slightly and rest on the home row.The modern world is a product of centuries of technological, societal, and cultural evolution.",
     "The technological revolution has been a defining characteristic of the modern world. From the internet and smartphones to artificial intelligence and machine learning, technology has reshaped every aspect of our lives. It has transformed the way we communicate, work, and even think. Information is now readily accessible, leading to a democratization of knowledge."
 ];
 
 const typingText = document.querySelector(".typing-text p");
 const inpField = document.querySelector(".wrapper .input-field");
-const tryAgainBtn = document.querySelector(".content button") ;
+const tryAgainBtn = document.querySelector(".content button");
 const timeTag = document.querySelector(".time span b");
 const mistakeTag = document.querySelector(".mistake span");
 const wpmTag = document.querySelector(".wpm span");
@@ -37,4 +36,43 @@ function loadParagraph() {
 
 }
 
+function initTyping() {
+    let characters = typingText.querySelectorAll("span");
+    let typedChar = inpField.ariaValueMax.split("")[charIndex];
+    if (charIndex < characters.length - 1 && timeLeft > 0) {
+        if (!isTyping) {
+            timer = setInterval(initTimer, 1000);
+            isTyping = true;
+        }
+        if (typedChar == null) {
+            if (charIndex > 0) {
+                charIndex--;
+                if (characters[charIndex].classList.contains("incorrect")) {
+                    mistake--;
+                }
+                characters[charIndex].classList.remove("correct", "incorrect");
+            }
+        } else {
+            if (characters[charIndex].innerText == typedChar) {
+                characters[charIndex].classList.add("correct");
+            } else {
+                mistake++;
+                characters[charIndex].classList.add("incorrect");
+            }
+            charIndex++;
+        }
+        characters.forEach(span => span.classList.remove("active"));
+        characters[charIndex].classList.add("active");
+
+        let wpm = math.round(((charIndex - mistake) / 5) / (maxTime - timeLeft) * 60);
+        wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+
+        wpmTag.innerText = wpm;
+        mistakeTag.innerText = mistake;
+        cpmTag.innerText = charIndex - mistake;
+    }else{
+        clearInterval(timer);
+        inpField.value = "";
+    }
+}
 
