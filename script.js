@@ -7,7 +7,12 @@ const paragraphs = [
     "There are different types of people in each country of the world. Out of millions of people, only a few personalities become or considered as Nobel on other meaning we can say they are great.Some become great and unique by birth, and some become great or noble by their deeds and sacrifices.",
     "For acquiring noble and honorable personality, it is essential to do things thoughtfully and dedicatedly in life.One thing is significant for each citizen of any country, which is nationalism or loyalty with the nation. To understand the importance of the place of our birth, we must recognize and grow with the soil & smell of the country.",
     "The basic technique stands in contrast to hunt and peck typing in which the typist keeps his or her eyes on the source copy at all times. Touch typing also involves the use of the home row method, where typists keep their wrists up, rather than resting them on a desk or keyboard (which can cause carpal tunnel syndrome). To avoid this, typists should sit up tall, leaning slightly forward from the waist, place their feet flat on the floor in front of them with one foot slightly in front of the other, and keep their elbows close to their sides with forearms slanted slightly upward to the keyboard; fingers should be curved slightly and rest on the home row.The modern world is a product of centuries of technological, societal, and cultural evolution.",
-    "The technological revolution has been a defining characteristic of the modern world. From the internet and smartphones to artificial intelligence and machine learning, technology has reshaped every aspect of our lives. It has transformed the way we communicate, work, and even think. Information is now readily accessible, leading to a democratization of knowledge."
+    "The technological revolution has been a defining characteristic of the modern world. From the internet and smartphones to artificial intelligence and machine learning, technology has reshaped every aspect of our lives. It has transformed the way we communicate, work, and even think. Information is now readily accessible, leading to a democratization of knowledge.",
+    "Global Warming is a dangerous effect on our environment that we are facing these days. Rapid industrialization, increase in the population growth and pollution are causing a rise in Global Warming. Global Warming refers to the increase in the average temperature of the earth's surface during the last century. One of the reasons why Global Warming is dangerous is because it disturbs the overall ecology of the planet. This results in floods, famine, cyclones and other issues. There are many causes and results of this warming and is a danger for the existence of life on earth.",
+    "Mountains are very special places. For many, they are sacred; to most, they bring an uplifting of the spirit and refreshment; to a few, they bring fear. They are the home of many different people on every continent. They occur in all biogeographical regions of the world. They are treasuries of high biodiversity and rich in endemic species. Mountains tend to have different climate conditions and a variety of geological and physiographic features. They provide magnificent scenery and the qualities of remoteness and wilderness.",
+    "Technology has reduced the effort and time and increased the efficiency of the production requirements in every field. It has made our lives easy, comfortable, healthy, and enjoyable. It has brought a revolution in transport and communication. The advancement of technology, along with science, has helped us to become self-reliant in all spheres of life. With the innovation of a particular technology, it becomes part of society and integral to human lives after a point in time.",
+    "Tourism is the largest and fastest-growing industry across the world. It is a source of revenue and employment. It also gives the opportunity for people to understand the culture, civilization, and religious aspects of a country. There are many countries whose main source of revenue is Tourism. It is an export that is not visible which earns valuable foreign exchange without any substantial or actual loss of internal resources.",
+    "Transportation is movement of people and goods from one location to another. Throughout history, the economic wealth and military power of a people or a nation have been closely tied to efficient methods of transportation. Transportation provides access to natural resources and promotes trade, allowing a nation to accumulate wealth and power. Transportation also allows the movement of soldiers, equipment, and supplies so that a nation can wage war."
 ];
 
 const typingText = document.querySelector(".typing-text p");
@@ -38,7 +43,7 @@ function loadParagraph() {
 
 function initTyping() {
     let characters = typingText.querySelectorAll("span");
-    let typedChar = inpField.ariaValueMax.split("")[charIndex];
+    let typedChar = inpField.value.split("")[charIndex];
     if (charIndex < characters.length - 1 && timeLeft > 0) {
         if (!isTyping) {
             timer = setInterval(initTimer, 1000);
@@ -70,9 +75,34 @@ function initTyping() {
         wpmTag.innerText = wpm;
         mistakeTag.innerText = mistake;
         cpmTag.innerText = charIndex - mistake;
-    }else{
+    } else {
         clearInterval(timer);
         inpField.value = "";
     }
 }
+function initTimer() {
+    if (timeLeft > 0) {
+        timeLeft--;
+        timeTag.innerText = timeLeft;
+        let wpm = Math.round(((charIndex - mistake) / 5) / (maxTime - timeLeft) * 60);
+        wpmTag.innerText = wpm;
+    } else {
+        clearInterval(timer);
+    }
+}
 
+function resetGame() {
+    loadParagraph();
+    clearInterval(timer);
+    timeLeft = maxTime;
+    charIndex = mistake = isTyping = 0;
+    inpField.value = "";
+    timeTag.innerText = timeLeft;
+    wpmTag.innerText = 0;
+    mistakeTag.innerText = 0;
+    cpmTag.innerText = 0;
+}
+
+loadParagraph();
+inpField.addEventListener("input", initTyping);
+tryAgainBtn.addEventListener("click", resetGame);
