@@ -10,3 +10,13 @@ const paragraphs = [
     "The modern world is a product of centuries of technological, societal, and cultural evolution. It is characterized by rapid advancements in technology, globalization, and an increased awareness of social issues.",
     "The technological revolution has been a defining characteristic of the modern world. From the internet and smartphones to artificial intelligence and machine learning, technology has reshaped every aspect of our lives. It has transformed the way we communicate, work, and even think. Information is now readily accessible, leading to a democratization of knowledge."
 ];
+
+const typingText = document.querySelector(".typing-text p");
+const inpField = document.querySelector(".wrapper .input-field");
+const tryAgainBtn = document.querySelector(".content button") ;
+const timeTag = document.querySelector(".time span b");
+const mistakeTag = document.querySelector(".mistake span");
+const wpmTag = document.querySelector(".wpm span");
+const cpmTag = document.querySelector(".cpm span");
+
+
